@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './komponente/Navbar';
 import Pocetna from './komponente/Pocetna';
@@ -7,11 +7,17 @@ import KreirajZadatak from './komponente/KreirajZadatak'; // Dodajemo KreirajZad
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
   return (
     <Router>
       <div className="App">
-        <header>        </header>
-
+        <header>        
+        </header>
 
         <body>
           <nav>
@@ -20,8 +26,8 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<Pocetna />} />
-            <Route path="/zadaci" element={<Zadaci />} />
-            <Route path="/kreiraj-zadatak" element={<KreirajZadatak />} /> {/* Dodajemo rutu za KreirajZadatak */}
+            <Route path="/to-do-lista" element={<Zadaci tasks={tasks} />} />
+            <Route path="/kreiraj-zadatak" element={<KreirajZadatak addTask={addTask} />} />
           </Routes>
         </body>
       </div>

@@ -31,7 +31,7 @@ const Navbar = () => {
       <div style={linkContainerStyle}>
         <Link to="/" style={linkStyle}>Pocetna</Link>
         <div style={linkGapStyle}></div>
-        <Link to="/zadaci" style={linkStyle}>Zadaci</Link>
+        <Link to="/to-do-lista" style={linkStyle}>To-do lista</Link> {/* Updated link */}
         <div style={linkGapStyle}></div>
         <Link to="/kreiraj-zadatak" style={linkStyle}>Kreiraj zadatak</Link>
       </div>

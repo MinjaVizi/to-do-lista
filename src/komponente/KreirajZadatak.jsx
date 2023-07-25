@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const KreirajZadatak = () => {
+const KreirajZadatak = ({ addTask }) => {
   const [naslov, setNaslov] = useState('');
   const [opis, setOpis] = useState('');
   const [rok, setRok] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ovdje možete implementirati logiku za slanje zadatka na to-do listu
+    const newTask = {
+      id: Math.random(),
+      text: naslov,
+      opis: opis,
+      rok: rok,
+      completed: false,
+    };
+    addTask(newTask);
+    navigate('/to-do-lista');
   };
 
   const handleCancel = () => {
-    // Ovdje možete implementirati logiku za otkazivanje kreiranja zadatka i preusmjeravanje na drugu stranicu
+    setNaslov('');
+    setOpis('');
+    setRok('');
   };
 
   return (
@@ -107,7 +120,7 @@ const KreirajZadatak = () => {
                 cursor: 'pointer',
               }}
             >
-              Otkaži
+              Otkazi
             </button>
           </div>
         </form>
@@ -117,4 +130,3 @@ const KreirajZadatak = () => {
 };
 
 export default KreirajZadatak;
-
