@@ -1,25 +1,40 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const navbarStyle = {
-    backgroundColor: '#b2d8d8', // Svijetloplava boja (možete promijeniti vrijednost prema želji)
-    height: '60px', // Visina navigacijske trake (prilagodite prema potrebi)
+    backgroundColor: '#b2d8d8',
+    height: '60px',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    // Dodajte ostale stilove prema potrebi (npr. font-size, font-family, itd.)
+    padding: '0 2em',
+  };
+
+  const linkStyle = {
+    textDecoration: 'none',
+    color: '#000',
+    fontSize: '18px',
+    fontWeight: 'bold',
+  };
+
+  const linkContainerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+  };
+
+  const linkGapStyle = {
+    marginLeft: '2em',
   };
 
   return (
     <div style={navbarStyle}>
-      {/* Dodajte sadržaj navigacijske trake ovdje */}
-      <a href='/'className="navbar-brand">Pocetna</a>
-
-
-      
+      <div style={linkContainerStyle}>
+        <Link to="/" style={linkStyle}>Pocetna</Link>
+        <div style={linkGapStyle}></div>
+        <Link to="/zadaci" style={linkStyle}>Zadaci</Link>
+      </div>
     </div>
   );
-}
+};
 
 export default Navbar;
-
