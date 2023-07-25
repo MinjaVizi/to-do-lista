@@ -1,5 +1,7 @@
 import './App.css';
 import Navbar from './komponente/Navbar'; 
+import Pocetna from './komponente/Pocetna'; 
+
 
 function App() {
   return (
@@ -9,7 +11,9 @@ function App() {
 
       <body> 
         <nav>
+
           <Navbar /> 
+        <Pocetna/>
         </nav>
        
 
