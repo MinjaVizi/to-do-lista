@@ -1,40 +1,34 @@
 import React from 'react';
 
-const JedanZadatak = ({ task, handleDelete }) => {
+const JedanZadatak = ({ task, handleToggleCompleted, showCompleted }) => {
   const { id, text, opis, rok, completed } = task;
+
+  const handleToggle = () => {
+    handleToggleCompleted(id);
+  };
 
   return (
     <div
+      className={`task-item ${completed ? 'completed' : ''}`}
       style={{
-        backgroundColor: completed ? '#e5e5e5' : '#f2f2f2',
-        borderRadius: '4px',
+        borderRadius: '10px',
+        backgroundColor: '#f2f2f2',
         padding: '10px',
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
         marginBottom: '2em',
       }}
     >
-      <div style={{ flexGrow: 1, marginRight: '1em' }}>
-        <h3 style={{ marginBottom: '0.5em' }}>{text}</h3>
-        <p>{opis}</p>
-      </div>
-      <div style={{ flexGrow: 1, marginRight: '1em' }}>
-        <p>Rok za obavljanje: {rok}</p>
-        <button
-          onClick={() => handleDelete(id)}
-          style={{
-            padding: '0.5em 1em',
-            border: 'none',
-            borderRadius: '4px',
-            backgroundColor: '#FF0000',
-            color: '#fff',
-            cursor: 'pointer',
-          }}
-        >
-          X
+      <h3 style={{ marginBottom: '0.5em', textDecoration: completed && showCompleted ? 'line-through' : 'none' }}>
+        {text}
+      </h3>
+      <p style={{ textDecoration: completed && showCompleted ? 'line-through' : 'none' }}>{opis}</p>
+      <p>Rok za obavljanje: {rok}</p>
+      {showCompleted && ( // Show the button only when "Završeni zadaci" or "Svi zadaci" filter is selected
+        <button onClick={handleToggle} className="task-button done">
+          Završeno
         </button>
-      </div>
+      )}
     </div>
   );
 };

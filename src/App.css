@@ -1,52 +1,26 @@
-/* Navbar.css */
 .navbar {
-  background-color: #b2d8d8; /* Svijetloplava boja (možete promijeniti vrijednost prema želji) */
-  height: 60px; /* Visina navigacijske trake (prilagodite prema potrebi) */
+  background-color: #b2d8d8;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Dodajte ostale stilove prema potrebi (npr. font-size, font-family, itd.) */
 }
 
-.task-list {
-  list-style: none;
-  padding: 0;
-}
-
-.task-item {
+.link-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background-color: #f2f2f2;
-  border-radius: 4px;
-  margin-bottom: 8px;
 }
 
-.task-item.completed {
-  text-decoration: line-through;
-  background-color: #e5e5e5;
+.link-container a {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 2em;
 }
 
-.task-item button {
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 4px;
-  background-color: #fff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.task-item button.tick {
-  margin-right: 8px;
-  color: #4CAF50;
-}
-
-.task-item button.cross {
-  color: #FF0000;
+.link-container a:first-child {
+  margin-left: 0;
 }
 
 /* KreirajZadatak.css */
@@ -93,3 +67,99 @@
 .form button.cancel {
   background-color: #ccc;
 }
+
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.task-item.completed {
+  text-decoration: line-through;
+  background-color: #e5e5e5;
+}
+
+.task-button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-button.tick {
+  margin-right: 8px;
+  color: #4CAF50;
+}
+
+.task-button.cross {
+  color: #FF0000;
+}
+/* Stil za komponentu JedanZadatak */
+.task-item {
+  width: 20em;
+  margin: 2em;
+  padding: 2em;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-card {
+  /* Stilovi za sadržaj kartice */
+  /* Dodajte ovde željene stilove za sadržaj kartice */
+  flex-grow: 1;
+}
+
+.task-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.task-button {
+  /* Stilovi za dugmad "Završeno" i "Obriši" */
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-button.cross {
+  color: #FF0000;
+}
+
+.task-button.done {
+  margin-right: 8px;
+  color: #4CAF50;
+}
+
+/* Stilovi za završene zadatke */
+.task-item.completed .task-card {
+  text-decoration: line-through;
+}
+
+/* Stilovi za obrisane zadatke */
+.task-item.deleted {
+  display: none;
+}
+
