@@ -14,7 +14,7 @@ const Pocetna = () => {
           Kreiranje To-Do liste nikada nije bilo lakše. Na stranici "Kreiraj zadatak", unesite naziv zadatka, opis zadatka i rok za obavljanje, a zatim jednostavno kliknite na "Dodaj na To-Do listu". Vaš zadatak će biti automatski dodat na listu, spremna za praćenje.
           <br />
           <br />
-          Na stranici "To-Do lista", možete pregledno videti sve vaše zadatke u obliku kartica, sa nazivom, opisom i rokom za obavljanje. Možete označiti zadatke kao završene, ili ih jednostavno obrisati kada više nisu potrebni.
+          Na stranici "To-Do lista", možete pregledno videti sve vaše zadatke u obliku kartica, sa nazivom, opisom i rokom za obavljanje, a možete ih označiti i kao završene.
           <br />
           <br />
           Spremni ste da organizujete svoj život i postignete sve svoje ciljeve? Počnite sa kreiranjem svoje To-Do liste odmah!

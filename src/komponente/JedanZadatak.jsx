@@ -1,6 +1,6 @@
 import React from 'react';
 
-const JedanZadatak = ({ task, handleToggleCompleted, showCompleted }) => {
+const JedanZadatak = ({ task, handleToggleCompleted, handleDeleteTask }) => {
   const { id, text, opis, rok, completed } = task;
 
   const handleToggle = () => {
@@ -19,16 +19,19 @@ const JedanZadatak = ({ task, handleToggleCompleted, showCompleted }) => {
         marginBottom: '2em',
       }}
     >
-      <h3 style={{ marginBottom: '0.5em', textDecoration: completed && showCompleted ? 'line-through' : 'none' }}>
+      <h3 style={{ marginBottom: '0.5em', textDecoration: completed ? 'line-through' : 'none' }}>
         {text}
       </h3>
-      <p style={{ textDecoration: completed && showCompleted ? 'line-through' : 'none' }}>{opis}</p>
+      <p style={{ textDecoration: completed ? 'line-through' : 'none' }}>{opis}</p>
       <p>Rok za obavljanje: {rok}</p>
-      {showCompleted && ( // Show the button only when "Završeni zadaci" or "Svi zadaci" filter is selected
-        <button onClick={handleToggle} className="task-button done">
+      <div style={{ display: 'flex', gap: '1em' }}>
+        <button onClick={handleToggle} className={`task-button done`}>
           Završeno
         </button>
-      )}
+        <button onClick={() => handleDeleteTask(id)} className={`task-button delete`}>
+          Obriši
+        </button>
+      </div>
     </div>
   );
 };

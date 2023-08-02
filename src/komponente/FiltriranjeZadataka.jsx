@@ -1,4 +1,3 @@
-// FiltriranjeZadataka.jsx
 import React, { useState } from 'react';
 
 const FiltriranjeZadataka = ({ filterTasks }) => {

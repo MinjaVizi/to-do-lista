@@ -10,6 +10,10 @@ const KreirajZadatak = ({ addTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (naslov.trim() === '' || opis.trim() === '' || rok.trim() === '') {
+      alert('Morate popuniti sva polja pre nego što dodate zadatak.');
+      return;
+    }
     const newTask = {
       id: Math.random(),
       text: naslov,
@@ -26,6 +30,8 @@ const KreirajZadatak = ({ addTask }) => {
     setOpis('');
     setRok('');
   };
+
+  const isDisabled = naslov.trim() === '' || opis.trim() === '' || rok.trim() === '';
 
   return (
     <div style={{ 
@@ -101,10 +107,11 @@ const KreirajZadatak = ({ addTask }) => {
                 padding: '0.5em 1em',
                 border: 'none',
                 borderRadius: '4px',
-                backgroundColor: '#007BFF',
+                backgroundColor: isDisabled ? '#ccc' : '#007BFF',
                 color: '#fff',
-                cursor: 'pointer',
+                cursor: isDisabled ? 'not-allowed' : 'pointer',
               }}
+              disabled={isDisabled}
             >
               Dodaj na to-do listu
             </button>

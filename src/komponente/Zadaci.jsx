@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import JedanZadatak from './JedanZadatak';
 import FiltriranjeZadataka from './FiltriranjeZadataka';
+import HitnostZadatka from './HitnostZadatka'; // Dodajemo HitnostZadatka komponentu
 
 const Zadaci = ({ tasks }) => {
   const [taskList, setTaskList] = useState(tasks);
-  const [filterOption, setFilterOption] = useState('svi'); // Track the selected filter option
+
+  useEffect(() => {
+    setTaskList(tasks);
+  }, [tasks]);
+
+  const initialValue = 'svi';
+  const [filterOption, setFilterOption] = useState(initialValue);
+  const [sortOption, setSortOption] = useState('datum-najranije'); // Define the sortOption state
 
   const handleTaskToggle = (id) => {
     const updatedTasks = taskList.map((task) => {
@@ -15,40 +23,72 @@ const Zadaci = ({ tasks }) => {
       return task;
     });
     setTaskList(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
+  const handleDeleteTask = (id) => {
+    const updatedTasks = taskList.filter((task) => task.id !== id);
+    setTaskList(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
+  const applyFilter = () => {
+    if (filterOption === 'zavrseni') {
+      const filteredTasks = taskList.filter((task) => task.completed);
+      return filteredTasks;
+    } else if (filterOption === 'nezavrseni') {
+      const filteredTasks = taskList.filter((task) => !task.completed);
+      return filteredTasks;
+    } else {
+      return taskList;
+    }
   };
 
   const handleFilterChange = (filterOption) => {
-    if (filterOption === 'zavrseni') {
-      const filteredTasks = tasks.filter((task) => task.completed);
-      setTaskList(filteredTasks);
-    } else if (filterOption === 'nezavrseni') {
-      const filteredTasks = tasks.filter((task) => !task.completed);
-      setTaskList(filteredTasks);
-    } else {
-      setTaskList(tasks); // Show all tasks when "Svi zadaci" is selected
-    }
-    setFilterOption(filterOption); // Update the selected filter option
+    setFilterOption(filterOption);
   };
 
-  const showCompleted = filterOption === 'svi' || filterOption === 'zavrseni'; // Determine whether completed tasks should be shown
+  const handleSortChange = (sortOption) => { // Define the handleSortChange function
+    setSortOption(sortOption);
+    // Logic to sort the tasks based on the selected sort option
+  };
+
+  const filteredTasks = applyFilter();
+
+
+  useEffect(() => {
+    // Učitavanje podataka iz localStorage kada se komponenta montira
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTaskList(JSON.parse(storedTasks));
+    }
+  }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <FiltriranjeZadataka filterTasks={handleFilterChange} />
-      {taskList.length > 0 ? (
+    <div style={{ padding: '1em', backgroundColor: '#C3F9DC' }}>
+      <div className="navbar">
+        {/* Navbar content */}
+      </div>
+      <div style={{ display: 'flex', gap: '1.5em', alignItems: 'center' }}>
+        <FiltriranjeZadataka filterTasks={handleFilterChange} />
+        <HitnostZadatka filterTasks={handleSortChange} />
+      </div>
+      {filteredTasks.length === 0 ? (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 60px)' }}>
+          <p style={{ fontSize: '20px', color: '#000', maxWidth: '800px', textAlign: 'center' }}>
+            Trenutno nema zadataka! Kako biste kreirali novi zadatak kliknite na <Link to="/kreiraj-zadatak">kreiraj zadatak</Link>.
+          </p>
+        </div>
+      ) : (
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {taskList.map((task) => (
+          {filteredTasks.map((task) => (
             <JedanZadatak
               key={task.id}
               task={task}
               handleToggleCompleted={handleTaskToggle}
-              showCompleted={showCompleted} // Pass the showCompleted prop to JedanZadatak component
+              handleDeleteTask={handleDeleteTask}
             />
           ))}
-        </div>
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#f2f2f2', height: '100vh', justifyContent: 'center' }}>
-          <p style={{ fontSize: '20px', color: '#666', margin: '1em' }}>Trenutno nema neodrađenih zadataka! Kako biste kreirali novi zadatak kliknite na <Link to="/kreiraj-zadatak">kreiraj zadatak</Link>.</p>
         </div>
       )}
     </div>
@@ -56,4 +96,3 @@ const Zadaci = ({ tasks }) => {
 };
 
 export default Zadaci;
-
